@@ -27,21 +27,19 @@ public class Lane : MonoBehaviour {
 	}
 
 	public void UpdateLane(){
-		for (int i = 0; i < numOfSpots; i++) {
-			Spot _spot = spots [i];
-			int gnomoSteps = _spot.GetGnomoNmbOfSteps();
-			if (gnomoSteps > 0) {
-				if (i - gnomoSteps < 0) {
-					//Gnomo chegou no player, avisar ao manager e chamar lose scene.
+		
+	}
 
-				} else {
-					//Verificar se o gnomo pode fazer o movimento
-					if (!spots [i - gnomoSteps].HasGnomo()) { //Significa que não tem gnomo
-						spots[i - gnomoSteps].SetGnomoInSpot(_spot.GetGnomo());
-						_spot.RemoveGnomoFromSpot();
-					}
-				}
-			}
-		}
+	public Spot GetSpot(int ind){
+		//If spot exists, aka ind < 5 for now
+		return spots [ind];
+	}
+
+	public void UpdateSpot(int i){
+		spots [i].LetGnomoMove ();
+	}
+
+	public int size(){
+		return spots.Length;
 	}
 }

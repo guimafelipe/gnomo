@@ -5,14 +5,13 @@ using UnityEngine;
 public class Spot : MonoBehaviour {
 
 
-	public Gnomo gnomoInSpot;
+	public IGnomo gnomoInSpot;
 
 	public void SetGnomoInSpot(Gnomo gnomo){
 		gnomoInSpot = gnomo;
-		gnomoInSpot.SetNewPosition (this.transform);
 	}
 
-	public Gnomo GetGnomo(){
+	public IGnomo GetGnomo(){
 		return gnomoInSpot;
 	}
 
@@ -24,11 +23,11 @@ public class Spot : MonoBehaviour {
 		}
 	}
 
-	public int GetGnomoNmbOfSteps(){
-		if (gnomoInSpot != null) {
-			return gnomoInSpot.nSteps;
-		} 
-		return -1;
+	public void LetGnomoMove (){
+		if (HasGnomo ()) {
+			gnomoInSpot.TryToMove ();
+			RemoveGnomoFromSpot ();
+		}
 	}
 
 	public void RemoveGnomoFromSpot(){
