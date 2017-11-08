@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Gnomo.cs" />
      <Compile Include="Assets\Scripts\Lane.cs" />
+     <Compile Include="Assets\Scripts\LevelMap.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Spot.cs" />
  <Reference Include="UnityEngine.UI">
