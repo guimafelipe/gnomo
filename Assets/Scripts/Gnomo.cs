@@ -16,10 +16,16 @@ public class Gnomo : MonoBehaviour, IGnomo{
 	void Start () {
 		hp = maxHp;
 		lvlMap = GameObject.Find ("LevelMap").GetComponent<LevelMap>();
-		SetNewPosition (lvlMap.GetSpot (1, 3));
-		posX = 1; posY = 3;
+		StartCoroutine (Spawnar (0.5f));
+		//SetNewPosition (lvlMap.GetSpot (posX, posY));
 	}
-	
+
+	IEnumerator Spawnar(float x){
+		yield return new WaitForSeconds(x);
+		SetNewPosition (lvlMap.GetSpot (posX, posY));
+
+	}
+
 	// Update is called once per frame
 	void Update () {
 		
