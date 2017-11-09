@@ -32,6 +32,7 @@ public class Lane : MonoBehaviour {
 
 	public Spot GetSpot(int ind){
 		//If spot exists, aka ind < 5 for now
+		Debug.Assert(ind >= 0);
 		return spots [ind];
 	}
 

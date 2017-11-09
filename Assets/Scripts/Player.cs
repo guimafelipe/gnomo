@@ -7,25 +7,28 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	float rotationSpeed = 25f;
 	[SerializeField]
-	float rotationAngle = 72f;
+	float rotationAngle = 45f;
+
+
 
 	enum rotatingStates {rotatingLeft, rotatingRight, stopped};
 
 	[SerializeField]
 	int playerState;
-
 	bool isRotating = false;
+	public int laneAimed = 0;
 
+	private int numLanes = 5;
 
+	private const float EPS = 0.01f;
 	//Refatorar:
 
 	Quaternion targetRotation;
 
-	/*[SerializeField]
-	float originalYRot;*/
-
 	// Use this for initialization
 	void Start () {
+		transform.rotation = Quaternion.Euler (transform.eulerAngles.x, 0f ,transform.eulerAngles.z);
+		laneAimed = 2;
 		playerState = (int)rotatingStates.stopped;
 	}
 	
@@ -34,13 +37,22 @@ public class Player : MonoBehaviour {
 		if (playerState == (int)rotatingStates.stopped) {
 			if (Input.GetKeyDown (KeyCode.A)) {
 				//Rotate Left
-				playerState = (int)rotatingStates.rotatingLeft;
-				RotateLeft ();
-			} else if (Input.GetKeyDown (KeyCode.D)) {
+				if (laneAimed > 0) { 
+					playerState = (int)rotatingStates.rotatingLeft;
+					RotateLeft ();
+					laneAimed--;
+				}
+
+			}
+			else if (Input.GetKeyDown (KeyCode.D)) {
 				//Rotate Right
-				playerState = (int)rotatingStates.rotatingRight;
-				RotateRight ();
-			} else if (Input.GetMouseButtonDown (0)) {
+				if (laneAimed < numLanes - 1) {
+					playerState = (int)rotatingStates.rotatingRight;
+					RotateRight ();
+					laneAimed++;
+				}
+			}
+			else if (Input.GetMouseButtonDown (0)) {
 				//Shoot
 			}
 		}
@@ -54,35 +66,36 @@ public class Player : MonoBehaviour {
 		}
 
 	}
-		
 
 	void RotateLeft(){
-		//originalYRot = transform.rotation.y;
-		targetRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + rotationAngle, transform.eulerAngles.z);
+		float roundedPos = (float)(int)(transform.eulerAngles.y + 0.5f);
+		Debug.Log (roundedPos);
+		targetRotation = Quaternion.Euler(transform.eulerAngles.x, roundedPos - rotationAngle, transform.eulerAngles.z);
 	}
 
 	void DoRotatingLeftAnim(){
-		/*transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(
-			transform.rotation.x, originalYRot + rotationAngle, transform.rotation.z), Time.deltaTime * rotationSpeed);
-		if (transform.rotation.y == originalYRot + rotationAngle) {
-			playerState = (int)rotatingStates.stopped;
-		}*/
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-		if (transform.rotation == targetRotation) {
+		Debug.Log (targetRotation);
+		if (Mathf.Abs(transform.rotation.eulerAngles.y - targetRotation.eulerAngles.y) < EPS) {
+			transform.rotation = targetRotation;
 			playerState = (int)rotatingStates.stopped;
 		}
 
 	}
 
 	void RotateRight(){
-		//originalYRot = transform.rotation.y;
-		targetRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y - rotationAngle, transform.eulerAngles.z);
+		float roundedPos = (float)(int)(transform.eulerAngles.y + 0.5f);
+		targetRotation = Quaternion.Euler(transform.eulerAngles.x, roundedPos + rotationAngle, transform.eulerAngles.z);
 	}
+
+
 
 	void DoRotatingRightAnim(){
 
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-		if (transform.rotation == targetRotation) {
+		Debug.Log (targetRotation);
+		if (Mathf.Abs(transform.rotation.eulerAngles.y - targetRotation.eulerAngles.y) < EPS) {
+			transform.rotation = targetRotation;
 			playerState = (int)rotatingStates.stopped;
 		}
 

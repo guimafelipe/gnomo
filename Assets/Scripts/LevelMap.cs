@@ -19,6 +19,7 @@ public class LevelMap : MonoBehaviour {
 
 	public Lane GetLane(int ind){
 		//if lane exists, aka ind < 5 for now.
+		Debug.Assert(ind >= 0);
 		return lanes [ind];
 	}
 
