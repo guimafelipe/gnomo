@@ -15,7 +15,6 @@ public class Player : MonoBehaviour {
 
 	[SerializeField]
 	int playerState;
-	bool isRotating = false;
 	public int laneAimed = 0;
 
 	private int numLanes = 5;

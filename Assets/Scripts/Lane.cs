@@ -16,19 +16,19 @@ public class Lane : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spots = new Spot[5];
+		spots = new Spot[numOfSpots];
 		rotationOfLane = angleRotation * id;
 		spots = GetComponentsInChildren<Spot> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		
 	}
 
 	public void UpdateLane(){
 		
-	}
+	}*/
 
 	public Spot GetSpot(int ind){
 		//If spot exists, aka ind < 5 for now

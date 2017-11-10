@@ -43,4 +43,18 @@ public class LevelMap : MonoBehaviour {
 		}
 	}
 
+	public void SpawnEnemy(GameObject enemy, int i, int j){
+		GameObject _enemy = Instantiate (enemy);
+		IEnemy _enemyScript; 
+		//Here we will need to hardCode all possible components scripst for now.
+		if (_enemy.GetComponent<Gnomo> () != null) {
+			_enemyScript = _enemy.GetComponent<Gnomo> ();
+		} else {
+			return;
+		}
+		Spot targetSpot;
+		targetSpot = GetSpot (i, lanes[i].size() - j -1 );
+		_enemyScript.SetNewPosition (targetSpot);
+	}
+
 }

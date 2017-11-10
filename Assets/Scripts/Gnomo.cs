@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Gnomo : GnomoBase, IEnemy{
 
-
-
-
-
 	// Use this for initialization
 	void Start () {
 		hp = maxHp;
 		lvlMap = GameObject.Find ("LevelMap").GetComponent<LevelMap>();
-		StartCoroutine (Spawnar (0.5f));
+		//StartCoroutine (Spawnar (0.5f));
 		//SetNewPosition (lvlMap.GetSpot (posX, posY));
 	}
 
