@@ -5,13 +5,13 @@ using UnityEngine;
 public class Spot : MonoBehaviour {
 
 
-	public IGnomo gnomoInSpot;
+	public IEnemy gnomoInSpot;
 
-	public void SetGnomoInSpot(Gnomo gnomo){
+	public void SetGnomoInSpot(IEnemy gnomo){
 		gnomoInSpot = gnomo;
 	}
 
-	public IGnomo GetGnomo(){
+	public IEnemy GetGnomo(){
 		return gnomoInSpot;
 	}
 

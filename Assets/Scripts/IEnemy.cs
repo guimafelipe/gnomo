@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IGnomo {
+public interface IEnemy {
 	
 	void TryToMove();
 

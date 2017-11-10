@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gnomo : MonoBehaviour, IGnomo{
+public class Gnomo : GnomoBase, IEnemy{
 
-	int hp;
-	public int maxHp = 1;
 
-	public int posX, posY;
-	public int nSteps = 1;
 
-	public LevelMap lvlMap;
+
 
 	// Use this for initialization
 	void Start () {
@@ -31,30 +27,17 @@ public class Gnomo : MonoBehaviour, IGnomo{
 		
 	}
 
-	public void TakeDamage(int dmg){
-		hp -= dmg;
-		if(hp <= 0){
-			//die here
-			Die();
-		}
-	}
-
 
 	//This method will be overrided for new types of gnomes. The below will work only for the base class gnome.
-	public void TryToMove(){
+	public override void TryToMove(){
 		if (lvlMap.CheckIfSpotIsEmpty (posX, posY - 1)) {
 			SetNewPosition (lvlMap.GetSpot (posX, --posY));
 		} else {
 			SetNewPosition (lvlMap.GetSpot (posX, posY));
 		}
 	}
-
-	public void SetNewPosition(Spot newSpot){
-		this.transform.position = newSpot.transform.position;
-		newSpot.SetGnomoInSpot (this);
-	}
-
-	public void Die(){
+		
+	public override void Die(){
 		Debug.Log ("Eu morri!");
 	}
 
