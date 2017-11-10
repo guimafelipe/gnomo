@@ -15,8 +15,11 @@ public class Player : MonoBehaviour {
 
 	[SerializeField]
 	int playerState;
-	public int laneAimed = 0;
 
+	public int maxBullets = 3;
+	public int bullets;
+
+	public int laneAimed = 0;
 	private int numLanes = 5;
 
 	private const float EPS = 0.01f;
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 		transform.rotation = Quaternion.Euler (transform.eulerAngles.x, 0f ,transform.eulerAngles.z);
 		laneAimed = 2;
+		bullets = maxBullets;
 		playerState = (int)rotatingStates.stopped;
 	}
 	
@@ -53,6 +57,7 @@ public class Player : MonoBehaviour {
 			}
 			else if (Input.GetMouseButtonDown (0)) {
 				//Shoot
+				Shoot();
 			}
 		}
 
@@ -66,6 +71,7 @@ public class Player : MonoBehaviour {
 
 	}
 
+	#region RotatingMethods
 	void RotateLeft(){
 		float roundedPos = (float)(int)(transform.eulerAngles.y + 0.5f);
 		Debug.Log (roundedPos);
@@ -79,7 +85,6 @@ public class Player : MonoBehaviour {
 			transform.rotation = targetRotation;
 			playerState = (int)rotatingStates.stopped;
 		}
-
 	}
 
 	void RotateRight(){
@@ -90,15 +95,20 @@ public class Player : MonoBehaviour {
 
 
 	void DoRotatingRightAnim(){
-
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 		Debug.Log (targetRotation);
 		if (Mathf.Abs(transform.rotation.eulerAngles.y - targetRotation.eulerAngles.y) < EPS) {
 			transform.rotation = targetRotation;
 			playerState = (int)rotatingStates.stopped;
 		}
-
 	}
+	#endregion
 
+	void Shoot(){
+		if (bullets > 0) {
+			Debug.Log ("Pew");
+			bullets--;
+		}
+	}
 
 }

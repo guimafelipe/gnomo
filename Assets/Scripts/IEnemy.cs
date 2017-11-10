@@ -12,4 +12,6 @@ public interface IEnemy {
 
 	void SetNewPosition(Spot spot);
 
+	void SetPositionCoord (int x, int y);
+
 }

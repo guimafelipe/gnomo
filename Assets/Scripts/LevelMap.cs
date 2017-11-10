@@ -53,8 +53,9 @@ public class LevelMap : MonoBehaviour {
 			return;
 		}
 		Spot targetSpot;
-		targetSpot = GetSpot (i, lanes[i].size() - j -1 );
+		targetSpot = GetSpot (i, j );
 		_enemyScript.SetNewPosition (targetSpot);
+		_enemyScript.SetPositionCoord (i, j);
 	}
 
 }

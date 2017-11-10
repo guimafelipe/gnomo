@@ -21,6 +21,10 @@ public abstract class GnomoBase : MonoBehaviour, IEnemy {
 		newSpot.SetGnomoInSpot (this);
 	}
 
+	public void SetPositionCoord(int x, int y){
+		posX = x; posY = y;
+	}
+
 	public void TakeDamage(int dmg){
 		hp -= dmg;
 		if(hp <= 0){
