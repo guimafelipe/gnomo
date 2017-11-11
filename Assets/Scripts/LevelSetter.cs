@@ -30,10 +30,8 @@ public class LevelSetter : MonoBehaviour {
 
 		foreach (ColorToPrefab element in colorMap) {
 			if (element.color.Equals (pixelColor)) {
-				Debug.Log (element.color);
-				Debug.Log (pixelColor);
-				//TODO: Mandar level map criar gnomo na lane i e no spot lane[i].size() - j - 1;
-			
+				//Mandar level map criar gnomo na lane i e no spot lane[i].size() - j - 1;
+				//Debug.Log ("Fui chamada");
 				levelMap.SpawnEnemy(element.prefab, i, j);
 				return;
 			}

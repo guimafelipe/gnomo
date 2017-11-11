@@ -12,12 +12,6 @@ public class Gnomo : GnomoBase, IEnemy{
 		//SetNewPosition (lvlMap.GetSpot (posX, posY));
 	}
 
-	IEnumerator Spawnar(float x){
-		yield return new WaitForSeconds(x);
-		SetNewPosition (lvlMap.GetSpot (posX, posY));
-
-	}
-
 	// Update is called once per frame
 	void Update () {
 		
@@ -26,6 +20,10 @@ public class Gnomo : GnomoBase, IEnemy{
 
 	//This method will be overrided for new types of gnomes. The below will work only for the base class gnome.
 	public override void TryToMove(){
+		if (posY == 0) {
+			KillPlayer ();
+			return;
+		}
 		if (lvlMap.CheckIfSpotIsEmpty (posX, posY - 1)) {
 			SetNewPosition (lvlMap.GetSpot (posX, --posY));
 		} else {
@@ -34,7 +32,9 @@ public class Gnomo : GnomoBase, IEnemy{
 	}
 		
 	public override void Die(){
-		Debug.Log ("Eu morri!");
+		//Debug.Log ("Eu morri!");
+		//Instanciar animação de morte?
+		Destroy(this.gameObject, 0.2f);
 	}
 
 }

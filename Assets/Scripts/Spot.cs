@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spot : MonoBehaviour {
 
-
 	public IEnemy gnomoInSpot;
 
 	public void SetGnomoInSpot(IEnemy gnomo){
@@ -34,4 +33,9 @@ public class Spot : MonoBehaviour {
 		gnomoInSpot = null;
 	}
 
+	public void DamageGnomo(int dmg){
+		if (gnomoInSpot.TakeDamage (dmg)) {
+			gnomoInSpot = null;
+		}
+	}
 }

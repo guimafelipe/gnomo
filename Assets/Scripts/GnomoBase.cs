@@ -12,7 +12,7 @@ public abstract class GnomoBase : MonoBehaviour, IEnemy {
 
 	public LevelMap lvlMap;
 
-	public abstract void TryToMove();
+	public abstract void TryToMove ();
 
 	public abstract void Die ();
 
@@ -25,11 +25,18 @@ public abstract class GnomoBase : MonoBehaviour, IEnemy {
 		posX = x; posY = y;
 	}
 
-	public void TakeDamage(int dmg){
+	public bool TakeDamage(int dmg){
 		hp -= dmg;
 		if(hp <= 0){
 			//die here
 			Die();
+			return true;
 		}
+		return false;
+	}
+
+	protected void KillPlayer(){
+		//Call lose scene;
+		Debug.Log("Player morreu");
 	}
 }

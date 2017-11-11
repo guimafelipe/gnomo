@@ -43,4 +43,14 @@ public class Lane : MonoBehaviour {
 	public int size(){
 		return spots.Length;
 	}
+
+	public void GotShoot(int dmg){
+		//Debug.Log ("lane recebeu o tiro");
+		for (int i = 0; i < size (); i++) {
+			if (spots [i].HasGnomo ()) {
+				spots [i].DamageGnomo (dmg);
+			}
+		}
+	}
+
 }

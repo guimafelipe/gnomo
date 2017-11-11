@@ -36,6 +36,7 @@ public class LevelMap : MonoBehaviour {
 	}
 
 	public void UpdateMap(){
+		Debug.Log ("Lanes atualizadas");
 		for (int i = 0; i < lanes.Length; i++) {
 			for (int j = 0; j < lanes [i].size (); j++) {
 				lanes [i].UpdateSpot (j);
@@ -56,6 +57,10 @@ public class LevelMap : MonoBehaviour {
 		targetSpot = GetSpot (i, j );
 		_enemyScript.SetNewPosition (targetSpot);
 		_enemyScript.SetPositionCoord (i, j);
+	}
+
+	public void ShootLane(int i, int dmg){
+		lanes [i].GotShoot (dmg);
 	}
 
 }

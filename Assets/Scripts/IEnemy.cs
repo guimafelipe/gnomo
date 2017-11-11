@@ -6,12 +6,14 @@ public interface IEnemy {
 	
 	void TryToMove();
 
-	void TakeDamage(int dmg);
+	bool TakeDamage(int dmg);
 
 	void Die();
 
 	void SetNewPosition(Spot spot);
 
 	void SetPositionCoord (int x, int y);
+
+	//void KillPlayer();
 
 }
